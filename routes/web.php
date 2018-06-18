@@ -26,6 +26,7 @@ Route::post('/clients/{id}', 'ClientsController@edit')->name('update_client');
 Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
 Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
 
+Route::get('/reservations', 'ReservationsController@index')->name('reservations');
 Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
 
 Route::get('/hello', function () {

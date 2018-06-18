@@ -29,4 +29,9 @@ class ReservationsController extends Controller
 
         // return view('reservation/bookRoom');
     }
+
+    public function index()
+    {
+        return view('reservation/index');
+    }
 }
