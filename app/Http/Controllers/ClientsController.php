@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Title as Title;
 use App\Client as Client;
+use App\Reservation as Reservation;
 
 class ClientsController extends Controller
 {
@@ -21,26 +22,26 @@ class ClientsController extends Controller
 
     public function index()
     {
-       // $obj = new \stdClass;
-       // $obj->id = 1;
-       // $obj->title = 'mr';
-       // $obj->name = 'john';
-       // $obj->last_name = 'doe';
-       // $obj->email = 'john@domain.com';
-       // $data['clients'][] = $obj;
+// $obj = new \stdClass;
+// $obj->id = 1;
+// $obj->title = 'mr';
+// $obj->name = 'john';
+// $obj->last_name = 'doe';
+// $obj->email = 'john@domain.com';
+// $data['clients'][] = $obj;
 
-       // $obj = new \stdClass;
-       // $obj->id = 2;
-       // $obj->title = 'ms';
-       // $obj->name = 'jane';
-       // $obj->last_name = 'doe';
-       // $obj->email = 'jane@another-domain.com';
-       // $data['clients'][] = $obj;
+// $obj = new \stdClass;
+// $obj->id = 2;
+// $obj->title = 'ms';
+// $obj->name = 'jane';
+// $obj->last_name = 'doe';
+// $obj->email = 'jane@another-domain.com';
+// $data['clients'][] = $obj;
 
-       $data = [];
-       $data['clients'] = $this->client->all();
+        $data = [];
+        $data['clients'] = $this->client->all();
 
-       return view('client/index', $data);
+        return view('client/index', $data);
     }
 
     public function new(Request $request)
@@ -77,7 +78,7 @@ class ClientsController extends Controller
 
         if( $request->isMethod('post') )
         {
-            //dd($data);
+//dd($data);
             $this->validate(
                 $request,
                 [
@@ -134,7 +135,7 @@ class ClientsController extends Controller
 
         if( $request->isMethod('post') )
         {
-            //dd($data);
+//dd($data);
             $this->validate(
                 $request,
                 [
@@ -165,5 +166,20 @@ class ClientsController extends Controller
         }
 
         return view('client/edit');
+    }
+
+    public function delete($id)
+    {
+        $reservations = $this->client->find($id)->reservations;
+        foreach($reservations as $reservation)
+        {
+            Reservation::destroy($reservation->id);
+        }
+        Client::destroy($id);
+
+        $data = [];
+        $data['clients'] = $this->client->all();
+
+        return view('client/index', $data);
     }
 }

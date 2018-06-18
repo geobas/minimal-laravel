@@ -9,6 +9,11 @@ use App\Reservation as Reservation;
 
 class ReservationsController extends Controller
 {
+    public function __construct(Reservation $reservation)
+    {
+        $this->reservations = $reservation->all();
+    }
+
 	//
     public function bookRoom($client_id, $room_id, $date_in, $date_out, Client $client, Room $room, Reservation $reservation)
     {
@@ -32,6 +37,9 @@ class ReservationsController extends Controller
 
     public function index()
     {
-        return view('reservation/index');
+        $data = [];
+        $data['reservations'] = $this->reservations;
+
+        return view('reservation/index', $data);
     }
 }

@@ -22,6 +22,7 @@ Route::get('/clients/new', 'ClientsController@new')->name('new_client');
 Route::post('/clients/new', 'ClientsController@create')->name('create_client');
 Route::get('/clients/{id}', 'ClientsController@show')->name('show_client');
 Route::post('/clients/{id}', 'ClientsController@edit')->name('update_client');
+Route::get('/clients/delete/{id}', 'ClientsController@delete')->name('delete_client');
 
 Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
 Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');

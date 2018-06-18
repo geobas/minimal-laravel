@@ -15,7 +15,18 @@
             </tr>
           </thead>
           <tbody>
-                    </tbody>
+              @foreach($reservations as $reservation)
+              <tr>
+                <td>{{ $reservation->room->name }}</td>
+                <td>{{ $reservation->client->title }}. {{ $reservation->client->name }} {{ $reservation->client->last_name }}</td>
+                <td>{{ $reservation->date_in }} - {{ $reservation->date_out }}</td>
+                <td>
+                  <a class="hollow button" href="#">EDIT</a>
+                  <a class="hollow button warning" href="#">DELETE</a>
+                </td>
+              </tr>
+              @endforeach
+          </tbody>
         </table>
       </div>
     </div>
