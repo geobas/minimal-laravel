@@ -9,9 +9,9 @@
             <label>Title</label>
             <select name="title">
             @foreach( $titles as $title )
-                          <option value="{{ $title }}" >{{ $title }}.</option>
+                  <option value="{{ $title }}" {{ $client_title === $title ? 'selected' : '' }}>{{ $title }}.</option>
             @endforeach
-                        </select>
+            </select>
           </div>
           <div class="medium-4  columns">
             <label>Name</label>

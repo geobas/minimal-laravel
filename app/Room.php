@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class Room extends Model
 {
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation');
+    }
+
     //
     public function getAvailableRooms($start_date, $end_date)
     {

@@ -22,21 +22,21 @@ class ClientsController extends Controller
 
     public function index()
     {
-// $obj = new \stdClass;
-// $obj->id = 1;
-// $obj->title = 'mr';
-// $obj->name = 'john';
-// $obj->last_name = 'doe';
-// $obj->email = 'john@domain.com';
-// $data['clients'][] = $obj;
+        // $obj = new \stdClass;
+        // $obj->id = 1;
+        // $obj->title = 'mr';
+        // $obj->name = 'john';
+        // $obj->last_name = 'doe';
+        // $obj->email = 'john@domain.com';
+        // $data['clients'][] = $obj;
 
-// $obj = new \stdClass;
-// $obj->id = 2;
-// $obj->title = 'ms';
-// $obj->name = 'jane';
-// $obj->last_name = 'doe';
-// $obj->email = 'jane@another-domain.com';
-// $data['clients'][] = $obj;
+        // $obj = new \stdClass;
+        // $obj->id = 2;
+        // $obj->title = 'ms';
+        // $obj->name = 'jane';
+        // $obj->last_name = 'doe';
+        // $obj->email = 'jane@another-domain.com';
+        // $data['clients'][] = $obj;
 
         $data = [];
         $data['clients'] = $this->client->all();
@@ -48,7 +48,7 @@ class ClientsController extends Controller
     {
         $data = [];
 
-        $data['title'] = $request->input('title');
+        $data['client_title'] = $request->input('title');
         $data['name'] = $request->input('name') ? $request->input('name') : 'geo';
         $data['last_name'] = $request->input('last_name');
         $data['address'] = $request->input('address');
@@ -78,7 +78,7 @@ class ClientsController extends Controller
 
         if( $request->isMethod('post') )
         {
-//dd($data);
+            //dd($data);
             $this->validate(
                 $request,
                 [
@@ -108,7 +108,7 @@ class ClientsController extends Controller
 
         $client_data = $this->client->find($id);
         $data['client_id'] = $id;
-        $data['title'] = $client_data->title;
+        $data['client_title'] = $client_data->title;
         $data['name'] = $client_data->name;
         $data['last_name'] = $client_data->last_name;
         $data['address'] = $client_data->address;
@@ -135,7 +135,7 @@ class ClientsController extends Controller
 
         if( $request->isMethod('post') )
         {
-//dd($data);
+            //dd($data);
             $this->validate(
                 $request,
                 [
