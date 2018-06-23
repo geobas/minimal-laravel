@@ -7,7 +7,7 @@
     <div class="medium-2  columns">BOOKING FOR:</div>
     <div class="medium-2  columns"><b>{{ $client->title }}. {{ $client->name }} {{ $client->last_name }}</b></div>
     <form action="" method="post">
-      <input type="hidden" name="_token" value="qbuQgVOYJ0tkLX6OPq5gYGJXqPG0Pke7VfuRXF53">
+      {{ csrf_field() }}
       <div class="medium-1  columns">FROM:</div>
       <div class="medium-2  columns"><input name="dateFrom" value="{{ $dateFrom }}" type="text" class="datepicker" /></div>
       <div class="medium-1  columns">TO:</div>
