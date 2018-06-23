@@ -4,3 +4,12 @@ p, h1, h2 {
 .error {
 	color: #F00;
 }
+
+.card, .card-header, .card-body {
+	border: none;
+	overflow: visible;
+}
+
+.card-header {
+	margin-left: -15px;
+}
