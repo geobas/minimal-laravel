@@ -31,7 +31,16 @@ Route::middleware('auth')->group( function() {
 
     Route::get('/reservations', 'ReservationsController@index')->name('reservations');
     Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
+
+    Route::get('/export', 'ClientsController@export');
 });
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/generate/password', function() { return bcrypt('admin'); });
+
+/*************************************************************************/
 
 Route::get('/hello', function () {
     return "<h3>Hello world</h3>";
@@ -57,8 +66,3 @@ Route::get('/facades/db', function () {
     return Crypt::decrypt('eyJpdiI6IitOWXJuMGhRenpcL0VmVDIzclFhSlhBPT0iLCJ2YWx1ZSI6Ik1iTzhPR1RKRjlMR09valRlSERPakE9PSIsIm1hYyI6IjdiODU2MTM2NDZiMzE0Mzg2Nzc2NTk4NDUwNjk1OTkzMzY2MGNjMTBiODYxYWJmOGRiNGE1YWVlNWJjZmNkMjYifQ==');
     // return Request::userAgent();
 });
-
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/generate/password', function() { return bcrypt('admin'); });

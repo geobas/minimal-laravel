@@ -192,4 +192,13 @@ class ClientsController extends Controller
 
         return view('client/index', $data);
     }
+
+    public function export()
+    {
+        $data = [];
+        $data['clients'] = $this->client->all();
+        header('Content-Disposition: attachment;filename=export.xls');
+
+        return view('client/export', $data);
+    }
 }
