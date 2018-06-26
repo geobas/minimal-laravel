@@ -18,7 +18,9 @@ class CreateRoomsTable extends Migration
             $table->string('name');
             $table->integer('floor');
             $table->text('description');
-            $table->timestamps();
+            // $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

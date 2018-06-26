@@ -21,7 +21,9 @@ class CreateReservationsTable extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->integer('room_id')->unsigned();
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->timestamps();
+            // $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

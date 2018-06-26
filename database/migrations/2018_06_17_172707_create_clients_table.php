@@ -23,7 +23,9 @@ class CreateClientsTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('email');
-            $table->timestamps();
+            // $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
