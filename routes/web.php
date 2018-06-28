@@ -19,7 +19,7 @@
 Route::middleware('auth')->group( function() {
     Route::get('/', 'ContentsController@home')->name('home');
     // Route::get('/clients', 'ClientsController@index')->name('clients')->middleware('auth');
-    Route::get('/clients', 'ClientsController@index')->name('clients')->middleware('auth');
+    Route::get('/clients', 'ClientsController@index')->name('clients');
     Route::get('/clients/new', 'ClientsController@new')->name('new_client');
     Route::post('/clients/new', 'ClientsController@create')->name('create_client');
     Route::get('/clients/{id}', 'ClientsController@show')->name('show_client');
