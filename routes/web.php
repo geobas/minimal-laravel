@@ -62,7 +62,7 @@ Route::get('/home', function () {
     return view('welcome', $data);
 });
 
-Route::get('/titles', 'ClientController@di');
+Route::get('/titles', 'ClientsController@di');
 
 Route::get('/facades/db', function () {
     // return Crypt::encrypt('geobas');
