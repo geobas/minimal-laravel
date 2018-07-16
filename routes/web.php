@@ -1,5 +1,8 @@
 <?php
 
+use App\Reservation;
+use App\Room;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,4 +71,37 @@ Route::get('/facades/db', function () {
     // return Crypt::encrypt('geobas');
     return Crypt::decrypt('eyJpdiI6IitOWXJuMGhRenpcL0VmVDIzclFhSlhBPT0iLCJ2YWx1ZSI6Ik1iTzhPR1RKRjlMR09valRlSERPakE9PSIsIm1hYyI6IjdiODU2MTM2NDZiMzE0Mzg2Nzc2NTk4NDUwNjk1OTkzMzY2MGNjMTBiODYxYWJmOGRiNGE1YWVlNWJjZmNkMjYifQ==');
     // return Request::userAgent();
+});
+
+Route::get('/test', function() {
+
+    // Room::create(['name' => 'aaa', 'floor' => 2, 'description' => 'sss']);
+
+    // $room = new Room();
+    // $room->name = 'bbb';
+    // $room->floor = 3;
+    // $room->description = 'xxxx zzzz';
+    // $room->save();
+
+    // $room = new Room(['name' => 'dddd', 'floor' => 2, 'description' => 'ddddd']);
+    // $room->save();
+
+    // $room = Room::where('name', 'dddd')->first()->id;
+    // dd($room);
+
+    // $rooms = Room::all();
+    // foreach ($rooms as $room) {
+    //     echo $room->name . '<br>';
+    // }
+
+    // $room = Room::findOrFail(11);
+    // dd($room);
+
+    // $room = Room::find(8);
+    // $room->description = 'new';
+    // $room->update();
+
+    $room = Room::findOrFail(8);
+    $room->update(['description' => '999']);
+
 });

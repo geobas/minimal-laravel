@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class Room extends Model
 {
+    protected $fillable = [
+        'name',
+        'floor',
+        'description'
+    ];
+
     public function reservations()
     {
         return $this->hasMany('App\Reservation');
