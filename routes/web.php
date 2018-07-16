@@ -101,7 +101,11 @@ Route::get('/test', function() {
     // $room->description = 'new';
     // $room->update();
 
-    $room = Room::findOrFail(8);
-    $room->update(['description' => '999']);
+    // $room = Room::findOrFail(8);
+    // $room->update(['description' => '999']);
+
+    echo Carbon::now()->format('d-m-Y H:i:s');
 
 });
+
+Route::resource('/rooms', 'RoomsController');
