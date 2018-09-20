@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Title as Title;
 use App\Client as Client;
 use App\Reservation as Reservation;
+use App\Http\Requests\UserRequest;
 
 class ClientsController extends Controller
 {
@@ -63,25 +64,11 @@ class ClientsController extends Controller
         return view('client/form', $data);
     }
 
-    public function create(Request $request, Client $client)
+    public function create(UserRequest $request, Client $client)
     {
         if( $request->isMethod('post') )
         {
-            $this->validate(
-                $request,
-                [
-                    'name' => 'required',
-                    'last_name' => 'required|min:5',
-                    'address' => 'required',
-                    'zip_code' => 'required',
-                    'city' => 'required',
-                    'state' => 'required',
-                    'email' => 'required|unique:clients',
-                ]
-            );
-
             $client->create($request->all());
-
             return redirect('clients');
         }
 
