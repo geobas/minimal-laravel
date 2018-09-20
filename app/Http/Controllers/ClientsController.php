@@ -65,20 +65,8 @@ class ClientsController extends Controller
 
     public function create(Request $request, Client $client)
     {
-        $data = [];
-
-        $data['title'] = $request->input('title');
-        $data['name'] = $request->input('name');
-        $data['last_name'] = $request->input('last_name');
-        $data['address'] = $request->input('address');
-        $data['zip_code'] = $request->input('zip_code');
-        $data['city'] = $request->input('city');
-        $data['state'] = $request->input('state');
-        $data['email'] = $request->input('email');
-
         if( $request->isMethod('post') )
         {
-            //dd($data);
             $this->validate(
                 $request,
                 [
@@ -88,11 +76,11 @@ class ClientsController extends Controller
                     'zip_code' => 'required',
                     'city' => 'required',
                     'state' => 'required',
-                    'email' => 'required',
+                    'email' => 'required|unique:clients',
                 ]
             );
 
-            $client->insert($data);
+            $client->create($request->all());
 
             return redirect('clients');
         }
