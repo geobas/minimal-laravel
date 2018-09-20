@@ -104,7 +104,31 @@ Route::get('/test', function() {
     // $room = Room::findOrFail(8);
     // $room->update(['description' => '999']);
 
-    echo Carbon::now()->format('d-m-Y H:i:s');
+    // echo Carbon::now()->format('d-m-Y H:i:s');
+
+    // dd(Room::all()->toArray()[1]['name');
+
+    // $rooms = Room::select('id', 'name', 'description')->get();
+    // $rooms = Room::whereId('2')->get();
+    // foreach ($rooms as $room) {
+    //     var_dump($room->name);
+    // }
+
+    // $rooms = Room::where('id', '>', '2')->orderBy('id', 'desc')->get()->count();
+    // $rooms = Room::where('id', '>', '2')->orderBy('id', 'desc')->count();
+
+    // $room = Room::whereId(2); // Builder
+    // $room = Room::whereId(2)->first(); // Object
+    // $room = Room::whereId(2)->get(); // Collection
+    // $room = Room::whereId(2)->get()->toArray(); // Array
+    // $room = Room::find(1); // Object
+
+    // $reservation = Reservation::find(1)->client()->first()->name;
+    // $reservation = Reservation::find(1)->client->name;
+
+    // $reservation = Reservation::find(1)->client()->orderBy('id', 'desc')->get()[0]->name;
+    // $reservation = Reservation::find(1)->client()->orderBy('id', 'desc')->first()->name;
+    // dd($reservation);
 
 });
 
