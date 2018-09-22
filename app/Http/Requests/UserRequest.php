@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'zip_code' => 'required|digits:5',
             'city' => 'required|string',
             'state' => 'required|string',
-            'email' => 'required|email|unique:clients',
+            'email' => 'required|email|unique:clients,email,'. $this->id,
         ];
     }
 
