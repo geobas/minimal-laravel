@@ -32,15 +32,10 @@ class ClientsController extends Controller
     public function new(Request $request)
     {
         $data = [];
-
-        $data['client_title'] = $request->input('title');
+        $data = array_fill_keys($this->client->getFillable(), null);
         $data['name'] = $request->input('name', 'geo');
-        $data['last_name'] = $request->input('last_name');
-        $data['address'] = $request->input('address');
-        $data['zip_code'] = $request->input('zip_code');
-        $data['city'] = $request->input('city');
-        $data['state'] = $request->input('state');
-        $data['email'] = $request->input('email');
+        $data['client_title'] = '';
+        unset($data['title']);
 
         $data['titles'] = $this->titles;
         $data['modify'] = 0;
