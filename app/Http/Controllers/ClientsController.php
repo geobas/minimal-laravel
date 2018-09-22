@@ -34,7 +34,7 @@ class ClientsController extends Controller
         $data = [];
 
         $data['client_title'] = $request->input('title');
-        $data['name'] = $request->input('name') ? $request->input('name') : 'geo';
+        $data['name'] = $request->input('name', 'geo');
         $data['last_name'] = $request->input('last_name');
         $data['address'] = $request->input('address');
         $data['zip_code'] = $request->input('zip_code');
