@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Title as Title;
-use App\Client as Client;
 use App\Reservation as Reservation;
 use App\Http\Requests\UserRequest;
+use App\Repositories\ClientRepository as Client;
 
 class ClientsController extends Controller
 {
@@ -43,11 +43,11 @@ class ClientsController extends Controller
         return view('client/form', $data);
     }
 
-    public function create(UserRequest $request, Client $client)
+    public function create(UserRequest $request)
     {
         if( $request->isMethod('post') )
         {
-            $client->create($request->all());
+            $this->client->create($request->all());
             return redirect('clients');
         }
 
@@ -60,7 +60,7 @@ class ClientsController extends Controller
         $data['titles'] = $this->titles;
         $data['modify'] = 1;
 
-        $client_data = $this->client->findOrFail($id);
+        $client_data = $this->client->find($id);
 
         if ($client_data)
         {
@@ -84,8 +84,7 @@ class ClientsController extends Controller
     {
         if( $request->isMethod('post') )
         {
-            $client = $this->client->findOrFail($id);
-            $client->update($request->all());
+            $this->client->update($id, $request->all());
 
             return redirect('clients');
         }
@@ -100,12 +99,9 @@ class ClientsController extends Controller
         {
             Reservation::destroy($reservation->id);
         }
-        Client::destroy($id);
+        $this->client->delete($id);
 
-        $data = [];
-        $data['clients'] = $this->client->all();
-
-        return view('client/index', $data);
+        return redirect('clients');
     }
 
     public function export()
