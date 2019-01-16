@@ -130,6 +130,17 @@ Route::get('/test', function() {
     // $reservation = Reservation::find(1)->client()->orderBy('id', 'desc')->first()->name;
     // dd($reservation);
 
+    /* dump(get_class(Reservation::whereHas('client', function($query) {
+        $query->where('name', 'John');
+    })->where('date_out', '<=' ,'2018-09-28')));
+
+    /* dump(Reservation::whereHas('client', function($query) {
+        $query->where('name', 'John');
+    })->where('date_out', '<=' ,'2018-09-28')->get()[0]->client->name); */
+
+    // dd(get_class(DB::table('reservations')));
+    // dd(DB::table('reservations')->leftJoin('clients', 'reservations.client_id', '=', 'clients.id')->where('date_out', '<=' ,'2018-09-29')->first()->name);
+
 });
 
 Route::resource('/rooms', 'RoomsController');
