@@ -2,6 +2,7 @@
 
 use App\Reservation;
 use App\Room;
+use App\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +142,21 @@ Route::get('/test', function() {
     // dd(get_class(DB::table('reservations')));
     // dd(DB::table('reservations')->leftJoin('clients', 'reservations.client_id', '=', 'clients.id')->where('date_out', '<=' ,'2018-09-29')->first()->name);
 
+    // $client = Client::findOrFail(1)->with('reservations')->first(); // eager load, 'with()' fetches all clients
+    // $reservations = Client::findOrFail(1)->reservations; // Collection
+    // $reservations = Client::findOrFail(1)->reservations(); // HasMany
+    // $count = Client::findOrFail(1)->reservations->count(); // integer
+    // $boolean = Client::findOrFail(1)->reservations()->exists(); // boolean
+
+    // dump(Client::findOrFail(2)->with('reservations')->count()); // 2
+    // dump(Client::with('reservations')->count()); // 2
+
+    // if ( Client::findOrFail(1)->reservations()->exists() ) {
+    //     $reservations = Client::findOrFail(1)->reservations;
+    //     $reservations->each(function ($value) {
+    //         $value->update(['room_id' => 2]);
+    //     });
+    // }
 });
 
 Route::resource('/rooms', 'RoomsController');

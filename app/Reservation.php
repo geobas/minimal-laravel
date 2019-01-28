@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+	protected $fillable = [
+		'room_id',
+	];
+
     //
     public function client()
     {
