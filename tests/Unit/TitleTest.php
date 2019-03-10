@@ -17,12 +17,12 @@ class TitleTest extends TestCase
 
     public function testTitlesCount()
     {
-        $this->assertEquals(count($this->titles->all()), 2, 'All titles should be 2.');
+        $this->assertCount(2, $this->titles->all(), 'Wrong number of titles.');
     }
 
     public function testTitlesContent()
     {
-        $this->assertEquals($this->titles->get(0), 'Mr');
+        $this->assertEquals('Mr', $this->titles->get(0));
     }
 
     protected function tearDown()
