@@ -17,6 +17,7 @@
       </thead>
       <tbody>
 
+        @if( $clients->isNotEmpty() )
         @foreach( $clients as $client )
         <tr>
           <td>{{ $client->title }}. {{ $client->name }} {{ $client->last_name }}</td>
@@ -28,6 +29,11 @@
           </td>
         </tr>
         @endforeach
+        @else
+        <tr>
+          <th colspan="3">There are no users.</td>
+        </tr>
+        @endif
 
       </tbody>
     </table>

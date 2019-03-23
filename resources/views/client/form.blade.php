@@ -1,6 +1,9 @@
 @extends('layout.app')
 
 @section('content')
+
+
+
 <div class="row">
       <div class="medium-12 large-12 columns">
         <h4>{{ $modify == 1 ? 'Modify Client' : 'New Client' }}</h4>

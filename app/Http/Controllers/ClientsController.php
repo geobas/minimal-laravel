@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Title as Title;
-use App\Reservation as Reservation;
+use App\{Title, Reservation};
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use App\Repositories\ClientRepository as Client;
+use Illuminate\Contracts\View\Factory as View;
+use App\Traits\ClientDataHandler;
 
 class ClientsController extends Controller
 {
-    public function __construct(Title $titles, Client $client)
+    use ClientDataHandler;
+
+    protected $client;
+
+    protected $view;
+
+    public function __construct(View $view, Title $titles, Client $client)
     {
         $this->titles = $titles->all();
         $this->client = $client;
+        $this->view = $view;
     }
 
     public function di()
@@ -23,93 +31,52 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $data = [];
-        $data['clients'] = $this->client->all();
+        $clients = $this->client->all();
 
-        return view('client/index', $data);
+        return $this->view->make('client/index', compact('clients'));
     }
 
-    public function new(Request $request)
+    public function new(Request $request, View $view)
     {
-        $data = [];
-        $data = array_fill_keys($this->client->getFillable(), null);
-        $data['name'] = $request->input('name', 'geo');
-        $data['client_title'] = '';
-        unset($data['title']);
-
-        $data['titles'] = $this->titles;
-        $data['modify'] = 0;
-
-        return view('client/form', $data);
+        return $this->view->make('client/form', $this->newClientData($request));
     }
 
-    public function create(UserRequest $request)
+    public function create(View $view, UserRequest $request)
     {
-        if( $request->isMethod('post') )
-        {
+        if ( $request->isMethod('post') ) {
             $this->client->create($request->all());
+
             return redirect('clients');
         }
-
-        return view('client/create', $data);
     }
 
-    public function show($id, Request $request)
+    public function show(Request $request, View $view, $id)
     {
-        $data = [];
-        $data['titles'] = $this->titles;
-        $data['modify'] = 1;
+        $data = $this->showClientData($id, $request);
 
-        $client_data = $this->client->find($id);
-
-        if ($client_data)
-        {
-            $data = array_merge($data, $client_data->toArray());
-            $data['client_id'] = $data['id'];
-            unset($data['id']);
-            $data['client_title'] = $data['title'];
-            unset($data['title']);
-
-            $request->session()->put('last_updated', $client_data->name . ' ' . $client_data->last_name);
-        }
-        else
-        {
-            return redirect('clients');
-        }
-
-        return view('client/form', $data);
+        return $this->view->make('client/form', $data);
     }
 
-    public function edit($id, UserRequest $request)
+    public function edit(UserRequest $request, View $view, $id)
     {
-        if( $request->isMethod('post') )
-        {
+        if ( $request->isMethod('post') ) {
             $this->client->update($id, $request->all());
 
             return redirect('clients');
         }
-
-        return view('client/edit');
     }
 
-    public function delete($id)
+    public function delete($id, Reservation $reservation)
     {
-        $reservations = $this->client->find($id)->reservations;
-        foreach($reservations as $reservation)
-        {
-            Reservation::destroy($reservation->id);
-        }
-        $this->client->delete($id);
+        $this->deleteClient($id, $reservation);
 
         return redirect('clients');
     }
 
-    public function export()
+    public function export(View $view)
     {
-        $data = [];
-        $data['clients'] = $this->client->all();
-        header('Content-Disposition: attachment;filename=export.xls');
+        $data = $this->exportExcel();
 
-        return view('client/export', $data);
+        return $this->view->make('client/export', $data);
     }
 }
