@@ -157,6 +157,10 @@ Route::get('/test', function() {
     //         $value->update(['room_id' => 2]);
     //     });
     // }
+
+    // App::instance(App\Helpers\Weather::class, new App\Helpers\DummyWeather);
+    // $weather = App::make(App\Helpers\Weather::class);
+    // echo $weather->show();
 });
 
 Route::resource('/rooms', 'RoomsController');
