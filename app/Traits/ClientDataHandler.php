@@ -7,7 +7,7 @@ use App\Reservation;
 
 trait ClientDataHandler
 {
-    public function newClientData(Request $request)
+    private function newClientData(Request $request)
     {
         $new_client_data = [];
         $new_client_data = array_fill_keys($this->client->getFillable(), null);
@@ -21,7 +21,7 @@ trait ClientDataHandler
         return $new_client_data;
     }
 
-    public function showClientData($id, Request $request)
+    private function showClientData($id, Request $request)
     {
         $data = [];
         $data['titles'] = $this->titles;
@@ -44,7 +44,7 @@ trait ClientDataHandler
         return $data;
     }
 
-    public function deleteClient($id, Reservation $reservation)
+    private function deleteClient($id, Reservation $reservation)
     {
         $reservations = $this->client->find($id)->reservations;
         foreach( $reservations as $reservation ) {
@@ -53,7 +53,7 @@ trait ClientDataHandler
         $this->client->delete($id);
     }
 
-    public function exportExcel()
+    private function exportExcel()
     {
         $data = [];
         $data['clients'] = $this->client->all();
