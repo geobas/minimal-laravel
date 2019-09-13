@@ -20,8 +20,10 @@
       <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu="tckp8q-dropdown-menu" role="menubar">
           <li role="menuitem"><a href="{{ route('home') }}">Home</a></li>
+          @auth
           <li role="menuitem"><a href="{{ route('clients') }}">Clients</a></li>
           <li role="menuitem"><a href="{{ route('reservations') }}">Reservations</a></li>
+          @endauth
         </ul>
       </div>
 
@@ -51,7 +53,7 @@
   <div class="row column">
     <hr>
     <ul class="menu">
-      <li class="float-right">Copyright 2017</li>
+      <li class="float-right">Copyright {{ date("Y") }}</li>
     </ul>
   </div>
 
