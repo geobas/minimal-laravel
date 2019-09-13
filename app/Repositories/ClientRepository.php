@@ -38,7 +38,8 @@ class ClientRepository
      *
      * @return array
      */
-    public function getFillable() {
+    public function getFillable()
+    {
     	return $this->client->getFillable();
     }
 
