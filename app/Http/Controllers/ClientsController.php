@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\ClientRepository as Client;
 use Illuminate\Contracts\View\Factory as View;
 use App\Traits\{ClientDataHandler, Logger};
+use App\Contracts\ClientRepositoryInterface;
 
 class ClientsController extends Controller
 {
@@ -31,11 +32,11 @@ class ClientsController extends Controller
     /**
      * Initialize controller.
      *
-     * @param \Illuminate\View\Factory            $view
-     * @param \App\Title                          $titles
-     * @param \App\Repositories\ClientRepository  $client
+     * @param \Illuminate\View\Factory                  $view
+     * @param \App\Title                                $titles
+     * @param \App\Contracts\ClientRepositoryInterface  $client
      */
-    public function __construct(View $view, Title $titles, Client $client)
+    public function __construct(View $view, Title $titles, ClientRepositoryInterface $client)
     {
         $this->titles = $titles->all();
 

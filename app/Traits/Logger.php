@@ -10,6 +10,7 @@ trait Logger
 	 * Error logging level.
 	 *
 	 * @param \Throwable $t
+	 * @return void
 	 */
 	protected function LogError($t)
 	{
@@ -22,6 +23,7 @@ trait Logger
 	 * Warning logging level.
 	 *
 	 * @param \Throwable $t
+	 * @return void
 	 */
 	protected function LogWarning($t)
 	{
@@ -34,11 +36,10 @@ trait Logger
 	 * Info logging level.
 	 *
 	 * @param \Throwable $t
+	 * @return void
 	 */
 	protected function LogInfo($t)
 	{
         Log::info($t->getMessage());
-
-        abort(500);
 	}
 }

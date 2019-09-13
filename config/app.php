@@ -161,6 +161,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         // App\Providers\DummyServiceProvider::class,
 
+        /**
+         * Repository Provider
+         */
+        App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
