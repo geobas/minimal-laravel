@@ -7,6 +7,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+    }
+
     /**
      * A basic test example.
      *
@@ -14,8 +19,8 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $response = $this->call('GET', '/login');
 
-        $response->assertStatus(200);
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }

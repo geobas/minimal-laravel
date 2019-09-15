@@ -3,7 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use Auth;
 
@@ -14,28 +15,31 @@ class ContentsControllerTest extends TestCase
     protected function setUp()
     {
      	parent::setUp();
-        $this->response = $this->get('/login');
-        $this->response->assertStatus(200);
     }
 
     public function testLoginPage()
     {
+        $this->response = $this->call('GET', '/login');
+        $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertContains('Login', $this->response->getContent());
-        $this->response->assertSeeText('Remember Me')->assertDontSee('The original Landon perseveres');
+        $this->assertContains('Remember Me', $this->response->getContent());
+        $this->assertNotContains('The original Landon perseveres', $this->response->getContent());
     }
+
 
     public function testGuestUser()
     {
     	$this->assertTrue(Auth::guest());
     	$this->assertNull(Auth::user());
-   		$this->assertGuest();
     }
 
 	public function testLoggedInUser()
 	{
 		$user = factory(User::class)->create();
-		$this->actingAs($user)->get('/')->assertStatus(200)->assertSeeText('And the not-to-miss Rooftop Cafe');
-		$this->assertAuthenticated();
-		$this->assertNotNull(Auth::user());
+		$this->actingAs($user);
+        $this->response = $this->call('GET', '/');
+        $this->assertEquals(200, $this->response->getStatusCode());
+        $this->assertContains('And the not-to-miss Rooftop Cafe', $this->response->getContent());
+        $this->assertFalse(Auth::guest());
 	}
 }
