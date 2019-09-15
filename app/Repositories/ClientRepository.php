@@ -29,16 +29,6 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->client->all();
     }
 
-    /**
-     * Get the fillable attributes for the model.
-     *
-     * @return array
-     */
-    public function getFillable()
-    {
-    	return $this->client->getFillable();
-    }
-
     public function find(int $id)
     {
     	return $this->client->findOrFail($id);
@@ -57,5 +47,15 @@ class ClientRepository implements ClientRepositoryInterface
     public function delete(int $id)
     {
     	return $this->client->destroy($id);
+    }
+
+    /**
+     * Get the fillable attributes for the model.
+     *
+     * @return array
+     */
+    public function getFillable()
+    {
+        return $this->client->getFillable();
     }
 }
