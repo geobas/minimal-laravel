@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use Tests\FeatureTestCase as TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
@@ -25,7 +25,6 @@ class ContentsControllerTest extends TestCase
         $this->assertContains('Remember Me', $this->response->getContent());
         $this->assertNotContains('The original Landon perseveres', $this->response->getContent());
     }
-
 
     public function testGuestUser()
     {
