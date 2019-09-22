@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\{Title, Reservation};
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ClientRepository as Client;
 use Illuminate\Contracts\View\Factory as View;
@@ -88,11 +88,11 @@ class ClientsController extends Controller
      * Save a new client.
      *
      * @param  \Illuminate\View\Factory        $view
-     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\Http\Requests\ClientRequest  $request
      * @throws \Exception|\Error
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create(View $view, UserRequest $request)
+    public function create(View $view, ClientRequest $request)
     {
         try {
             if ($request->isMethod('post')) {
@@ -127,13 +127,13 @@ class ClientsController extends Controller
     /**
      * Update a client.
      *
-     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\Http\Requests\ClientRequest  $request
      * @param  \Illuminate\View\Factory        $view
      * @param  int                             $id
      * @throws \Exception|\Error
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(UserRequest $request, View $view, int $id)
+    public function edit(ClientRequest $request, View $view, int $id)
     {
         try {
             if ($request->isMethod('post')) {
