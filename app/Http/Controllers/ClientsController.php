@@ -117,10 +117,9 @@ class ClientsController extends Controller
     public function show(Request $request, View $view, int $id)
     {
         try {
-            $data = $this->showClientData($id, $request);
-
-            return $this->view->make('client/form', $data);
+            return $this->view->make('client/form', $this->showClientData($id, $request));
         } catch (\Throwable $t) {
+            // report($t);
             $this->LogError($t);
         }
     }
