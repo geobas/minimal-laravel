@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Client;
 use App\Repositories\ClientRepository;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exceptions\{ClientNotFoundException, CreateClientException, UpdateClientException};
 
 class ClientTest extends TestCase
 {
@@ -41,6 +41,11 @@ class ClientTest extends TestCase
         $this->assertEquals($data['title'], $client->title);
         $this->assertEquals($data['address'], $client->address);
         $this->assertEquals($data['state'], $client->state);
+
+        $this->expectException(CreateClientException::class);
+
+        $clientRepo = new ClientRepository(new Client);
+        $client = $clientRepo->create([]);
     }
 
     public function testFindClient()
@@ -54,7 +59,7 @@ class ClientTest extends TestCase
         $this->assertEquals($client->last_name, $find->last_name);
         $this->assertEquals($client->city, $find->city);
 
-        $this->expectException(ModelNotFoundException::class);
+        $this->expectException(ClientNotFoundException::class);
 
         $find = $clientRepo->find(666);
     }
@@ -80,6 +85,10 @@ class ClientTest extends TestCase
         $this->assertEquals($data['name'], $client->name);
         $this->assertEquals($data['zip_code'], $client->zip_code);
         $this->assertEquals($data['email'], $client->email);
+
+        $this->expectException(UpdateClientException::class);
+
+        $update = $clientRepo->update($client->id, ['title' => null]);
     }
 
     public function testDeleteClient()
@@ -90,5 +99,8 @@ class ClientTest extends TestCase
         $delete = $clientRepo->delete($client->id);
 
         $this->assertEquals(1, $delete);
+
+        $delete = $clientRepo->delete(666);
+        $this->assertNotEquals(1, $delete);
     }
 }
